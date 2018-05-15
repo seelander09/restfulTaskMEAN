@@ -1,0 +1,59 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="root">
+
+
+
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<button (click)="getTasksFromService()" name="button">get tasks</button>
+
+<h1>All the tasks:</h1>
+<ul>
+    <li *ngFor="let i of tasks">{{ i.title }}
+        <button (click)="deleteTasksFromService(i._id)" name="button">delete task</button>
+        <button (click)="showTaskFromService(i._id)" name="button">show details</button>
+        <button (click)="taskToShow(i)">Show</button>
+
+    </li>
+</ul>
+
+<!-- <h1>The third task:</h1>
+<ul>
+    <li *ngIf="tasks[2]">{{ tasks[2].title }}</li>
+</ul> -->
+
+<h1>Show task details:</h1>
+<ul>
+    <li>Title: {{  details.title }} </li>
+    <li>Description: {{  details.description }} </li>
+    <li>Created at: {{  details.created_at }} </li>
+    <li>Updated at: {{  details.updated_at }} </li>
+    <li>Id: {{  details._id }} </li>
+</ul>
+<button (click)="sendToEdit()" name="button">edit this</button>
+<h2>testing git</h2>
+
+<h1>Edit Task</h1>
+<form (submit)="updateFromService()" novalidate="">
+    <input type="text" name="editTask.title" [(ngModel)]="editTask.title"><br>
+    <input type="text" name="editTask.description" [(ngModel)]="editTask.description"><br>
+    <input type="submit" value="update this task in DB"><br>
+
+
+</form>
+
+
+<h1>create task</h1>
+
+<form (submit)="createTaskFromService()" novalidate="">
+
+    <p>{{ newtask | json }}</p>
+    <input type="text" name="newtask.title" [(ngModel)]="newtask.title"><br>
+    <input type="text" name="newtask.description" [(ngModel)]="newtask.description"><br>
+    <input type="submit" value="add this task to DB"><br>
+</form>
+
+<app-task *ngIf='selectedTask' [taskToShow]='selectedTask'></app-task>
